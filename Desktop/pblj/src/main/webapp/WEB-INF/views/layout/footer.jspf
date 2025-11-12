@@ -1,0 +1,10 @@
+    </main>
+    <jsp:useBean id="now" class="java.util.Date" scope="page"/>
+    <footer class="app-footer">
+        <div class="container">
+            <p>&copy; <fmt:formatDate value="${now}" pattern="yyyy"/> AuctionHub. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

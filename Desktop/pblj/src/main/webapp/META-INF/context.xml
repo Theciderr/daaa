@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/AuctionDB"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxTotal="50"
+              maxIdle="10"
+              maxWaitMillis="10000"
+              username="auction_user"
+              password="auction_pass"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://db:3306/auction_db?useSSL=false&amp;allowPublicKeyRetrieval=true&amp;serverTimezone=UTC"/>
+</Context>
+
+

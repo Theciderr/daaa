@@ -1,0 +1,52 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><c:out value="${pageTitle != null ? pageTitle : 'Online Auction System'}"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css"/>
+    <script>
+        window.appContext = {
+            baseUrl: '${pageContext.request.contextPath}',
+            csrfToken: '<c:out value="${sessionScope.csrfToken}"/>',
+            userRole: '<c:out value="${sessionScope.user.role}"/>',
+            userId: '<c:out value="${sessionScope.user.id}"/>'
+        };
+    </script>
+    <script defer src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+</head>
+<body>
+<header class="app-header">
+    <div class="container">
+        <h1 class="logo"><a href="${pageContext.request.contextPath}/">AuctionHub</a></h1>
+        <nav>
+            <ul>
+                <li><a href="${pageContext.request.contextPath}/search">Browse</a></li>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.user}">
+                        <c:if test="${sessionScope.user.role eq 'seller'}">
+                            <li><a href="${pageContext.request.contextPath}/seller/products">My Listings</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role eq 'buyer'}">
+                            <li><a href="${pageContext.request.contextPath}/history">My Bids</a></li>
+                        </c:if>
+                        <c:if test="${sessionScope.user.role eq 'admin'}">
+                            <li><a href="${pageContext.request.contextPath}/admin/dashboard">Admin</a></li>
+                        </c:if>
+                        <li><a href="${pageContext.request.contextPath}/profile">Profile</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${pageContext.request.contextPath}/login">Login</a></li>
+                        <li><a href="${pageContext.request.contextPath}/register">Register</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </ul>
+        </nav>
+    </div>
+</header>
+<div id="notification-panel" class="notification-panel"></div>
+<main class="container">
+

@@ -1,0 +1,2 @@
+C:\ProgramData\miniforge3
+C:\Program Files\Orange

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudoku Solver</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sudoku Solver</h1>
+        <p class="subtitle">Using Backtracking with Constraint Propagation</p>
+        
+        <div class="controls">
+            <button id="solveBtn" class="btn btn-primary">Solve</button>
+            <button id="clearBtn" class="btn btn-secondary">Clear</button>
+            <button id="exampleBtn" class="btn btn-secondary">Load Example</button>
+        </div>
+
+        <div id="sudoku-grid" class="sudoku-grid"></div>
+
+        <div class="info">
+            <div id="stats" class="stats"></div>
+            <div class="algorithm-info">
+                <h3>Algorithm: Backtracking + Constraint Propagation</h3>
+                <ul>
+                    <li><strong>Time Complexity:</strong> O(9^m) where m is empty cells</li>
+                    <li><strong>Space Complexity:</strong> O(m) for recursion stack</li>
+                    <li><strong>Optimization:</strong> MRV heuristic (Minimum Remaining Values)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="solver.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

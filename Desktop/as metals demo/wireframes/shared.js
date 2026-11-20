@@ -1,0 +1,19 @@
+const params=new URLSearchParams(location.search);
+if(params.get('theme')==='light')document.body.classList.add('light');
+document.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href);if(u.origin===location.origin&&/\/(home|quote|catalogue|services|contact)\.html$/.test(u.pathname)){u.searchParams.set('theme',params.get('theme')||'dark');a.href=u.href}});
+const form=document.getElementById('form');
+if(form){
+ const names={"AMF-3DR-08": "Lord Ram & Hanuman", "AMF-3DR-19": "Swan & Lotus", "AMF-3DR-30": "Seven Steeds", "AMF-3DR-14": "Floral Sweep", "AMF-3DR-01": "Solstice", "AMF-3DR-05": "Halo Deco", "AMF-3DR-06": "Tidewheel", "AMF-3DR-07": "Meridian", "AMF-3DR-09": "Eclipse", "AMF-3DR-02": "Arcade", "AMF-3DR-10": "Grand Portal", "AMF-3DR-11": "Deco Crown", "AMF-3DR-12": "Staggered Arcade", "AMF-3DR-13": "Twin Vault", "AMF-3DR-03": "Dune", "AMF-3DR-16": "Reedline", "AMF-3DR-17": "Contour Map", "AMF-3DR-18": "Crosscurrent", "AMF-3DR-04": "Riverleaf", "AMF-3DR-20": "Olive Spray", "AMF-3DR-21": "Ginkgo Drift", "AMF-3DR-22": "Bamboo Grove", "AMF-3DR-23": "Palm Study", "AMF-3DR-24": "Facet Grid", "AMF-3DR-25": "Woven Clay", "AMF-ASI-02": "Imperial Peacock", "AMF-ABS-01": "Art Deco Fan", "AMF-GEO-01": "Moroccan Star Lattice", "AMF-GEO-02": "Arc Grid", "AMF-GEO-03": "Greek Key Labyrinth", "AMF-GEO-04": "Linked Octagons", "AMF-GEO-05": "Herringbone Weave", "AMF-GEO-06": "Arabesque Star Mesh", "AMF-GEO-07": "Intersecting Orbs", "AMF-GEO-08": "Tumbling Cubes", "AMF-GEO-09": "Pebble Scatter", "AMF-ASI-03": "Palace Trellis", "AMF-FLO-01": "Regal Damask", "AMF-BOT-01": "Palmette Garden", "AMF-BOT-02": "Vine Scroll Lattice", "AMF-ABS-02": "Zephyr Scrolls", "AMF-FLO-02": "Blossom Scroll Border", "AMF-TRE-01": "Woodland Scrollwork", "AMF-BOT-03": "Lotus Rosette", "AMF-BOT-04": "Layered Jungle Leaves", "AMF-TRE-02": "Solstice Branches", "AMF-TRE-03": "Forest Canopy", "AMF-ABS-03": "Effervescence", "AMF-BOT-05": "Zen Bamboo", "AMF-TRE-04": "Majestic Oak", "AMF-BOT-06": "Tropical Blooms", "AMF-FLO-03": "Midnight Rosarium", "AMF-TRE-05": "Blossom Branch", "AMF-GEO-10": "Deco Shell Motif"};
+ const code=params.get('design');
+ if(names[code])document.getElementById('selected').textContent=names[code]+' · '+code;
+ if([...form.elements.need.options].some(o=>o.value===params.get('need')))form.elements.need.value=params.get('need');
+ document.getElementById('direct').onclick=()=>document.getElementById('directNote').hidden=false;
+ const file=document.getElementById('file');
+ file.onchange=()=>{document.getElementById('fileStatus').textContent=file.files[0]?'Selected: '+file.files[0].name+' — attach this file in WhatsApp.':''};
+ form.onsubmit=e=>{e.preventDefault();const data=new FormData(form);const lines=['Hello A.S Metal Fabricators, I would like a quote.'];if(names[code])lines.push('Design: '+code+' — '+names[code]);for(const [key,value]of data)if(String(value).trim())lines.push(key.charAt(0).toUpperCase()+key.slice(1)+': '+String(value).trim());if(file.files[0])lines.push('Reference to attach: '+file.files[0].name);document.getElementById('messageText').textContent=lines.join('\n');const handoff=document.getElementById('handoff');handoff.hidden=false;handoff.focus();handoff.scrollIntoView({block:'start'})};
+ document.getElementById('edit').onclick=()=>{document.getElementById('handoff').hidden=true;form.elements.name.focus()};
+}
+
+const menu=document.querySelector('.menu-toggle');if(menu)menu.onclick=()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));document.getElementById('site-nav').classList.toggle('is-open',open)};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu&&menu.getAttribute('aria-expanded')==='true'){menu.click();menu.focus()}});
+document.querySelectorAll('#site-nav a').forEach(a=>{if(new URL(a.href).pathname===location.pathname)a.setAttribute('aria-current','page')});

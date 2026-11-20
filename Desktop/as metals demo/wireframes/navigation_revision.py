@@ -1,0 +1,31 @@
+from pathlib import Path
+import re
+from urllib.parse import quote
+p=Path(__file__).resolve().parent
+home=(p/'home.html').read_text(encoding='utf-8')
+custom=home[home.index('<section><h2>Custom cutting'):home.index('<section><h2>Already have')]
+head='''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>A.S Metal Fabricators · Structure wireframe</title><link rel="stylesheet" href="style.css"><body>'''
+(p/'services.html').write_text(head+'<header></header><main class="wrap">'+custom+'</main><footer></footer><script src="shared.js"></script></body></html>',encoding='utf-8')
+(p/'contact.html').write_text(head+'''<header></header><main class="wrap"><section><p class="eyebrow">ABOUT & CONTACT</p><h1>Custom CNC work in Ambala.</h1><p>A.S Metal Fabricators offers designer jali, CNC-carved doors, relief wall panels and sculpted wall art made to customer specifications.</p><div class="quote-grid"><div><h2>Talk about your project.</h2><p>Akash Sharma · Proprietor</p><p><a href="tel:+918950917008">+91 89509 17008</a></p><a class="button primary" href="quote.html">Get a Quote on WhatsApp</a></div><div><h3>Visit</h3><address>Lakhnaur Sahib, Ambala<br>Haryana, India 133008</address><p class="muted">[Exact map pin and working hours to be confirmed]</p><a href="https://www.instagram.com/asmetalfab/">Instagram · @asmetalfab</a></div></div></section></main><footer></footer><script src="shared.js"></script></body></html>''',encoding='utf-8')
+offers=['Jali & partitions','Carved doors','Relief wall panels','Sculpted wall art']
+codes=['AMF-GEO-01','AMF-3DR-01','AMF-3DR-17','AMF-3DR-30']
+short='<section id="choose"><div class="section-title"><div><p class="eyebrow">BROWSE BY OFFERING</p><h2>Choose your collection.</h2></div><a href="catalogue.html">View all 54 designs</a></div><div class="collection-grid">'
+for offer,code in zip(offers,codes):
+    short+=f'<a class="collection-link" href="catalogue.html?offer={quote(offer)}"><img src="../research/catalogue/images/{code}-2.jpg" loading="lazy" alt="{offer} catalogue illustration"><h3>{offer}</h3><span>View collection →</span></a>'
+short+='</div><p class="muted">Catalogue illustrations. Material, finish and suitability confirmed per project.</p><a class="button primary" href="quote.html">Get a Quote on WhatsApp</a></section><section class="compact-prompt"><div><h2>Your own design or material?</h2><p>Explore custom CNC cutting, board options and finishes, or bring a reference directly.</p></div><div class="row"><a class="button" href="services.html">Custom work & materials</a><a class="button primary" href="quote.html">Get a Quote on WhatsApp</a></div></section>'
+start=home.index('<section id="choose">');end=home.index('</main>',start)
+home=home[:start]+short+home[end:]
+home=home.replace('href="#choose"','href="catalogue.html"')
+(p/'home.html').write_text(home,encoding='utf-8')
+nav='''<header class="site-header"><div class="wrap"><a class="brand" href="home.html">A.S Metal Fabricators<span>CUSTOM CNC CUTTING & CARVING</span></a><button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button><nav id="site-nav" aria-label="Main navigation"><a href="home.html">Home</a><a href="catalogue.html">Catalogue</a><a href="services.html">Custom work</a><a href="contact.html">About & contact</a><a class="button primary" href="quote.html">WhatsApp Quote</a></nav></div></header>'''
+footer='''<footer class="site-footer"><div class="wrap"><div class="footer-top"><div><a class="brand" href="home.html">A.S Metal Fabricators</a><p>Custom CNC cutting & carving.<br>Made to your specifications.</p><address>Lakhnaur Sahib, Ambala<br>Haryana, India 133008</address><a class="footer-phone" href="tel:+918950917008">+91 89509 17008</a></div><nav aria-label="Footer collections"><h3>Collections</h3>'''+''.join(f'<a href="catalogue.html?offer={quote(o)}">{o}</a>' for o in offers)+'''</nav><nav aria-label="Footer information"><h3>Explore</h3><a href="catalogue.html">Full catalogue</a><a href="services.html">Custom work & materials</a><a href="contact.html">About & contact</a><a href="https://www.instagram.com/asmetalfab/">Instagram</a></nav><div><h3>Have a project?</h3><p>Share a design code, reference or requirement.</p><a class="button primary" href="quote.html">Get a Quote on WhatsApp</a><details><summary>PDF catalogues</summary><a href="../catalogue/A.S.%20Metal%20Fabricators%20-%20Decorative%20CNC%20Panel%20Catalogue.pdf">Decorative panels · 43 MB</a><br><a href="../catalogue/A.S%20Metal%20Fabricators%20-%203D%20Relief%20Catalogue.pdf">3D relief · 33 MB</a></details></div></div><div class="footer-bottom"><small>© 2026 A.S Metal Fabricators</small><small>Website by <a href="https://expandr.in">ExpandR</a> <span class="demo-tag">Demo</span></small></div></div></footer>'''
+for name in ['home','catalogue','quote','services','contact']:
+    file=p/(name+'.html');s=file.read_text(encoding='utf-8');s=re.sub(r'<header\b.*?</header>',nav,s,flags=re.S);s=re.sub(r'<footer\b.*?</footer>',footer,s,flags=re.S);file.write_text(s,encoding='utf-8')
+js=p/'shared.js';s=js.read_text(encoding='utf-8').replace('(home|quote|catalogue)','(home|quote|catalogue|services|contact)');s+='''
+const menu=document.querySelector('.menu-toggle');if(menu)menu.onclick=()=>{const open=menu.getAttribute('aria-expanded')!=='true';menu.setAttribute('aria-expanded',String(open));document.getElementById('site-nav').classList.toggle('is-open',open)};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu&&menu.getAttribute('aria-expanded')==='true'){menu.click();menu.focus()}});
+document.querySelectorAll('#site-nav a').forEach(a=>{if(new URL(a.href).pathname===location.pathname)a.setAttribute('aria-current','page')});
+''';js.write_text(s,encoding='utf-8')
+for name in ['index.html','revised.html']:
+    f=p/name;s=f.read_text(encoding='utf-8');s=s.replace('<button data-page="quote"','<button data-page="services" aria-pressed="false">Custom work</button><button data-page="contact" aria-pressed="false">Contact</button><button data-page="quote"');f.write_text(s,encoding='utf-8')
+print('Short Home, shared navigation/footer and two supporting structure views updated.')

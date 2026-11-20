@@ -1,0 +1,114 @@
+[
+  {
+    "path": "/",
+    "width": 375,
+    "layout": {
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/",
+      "og": "http://127.0.0.1:3005/opengraph-image?646e4130a0eee440",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/gallery",
+    "width": 375,
+    "layout": {
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/gallery",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/quote",
+    "width": 375,
+    "layout": {
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/quote",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/contact",
+    "width": 375,
+    "layout": {
+      "width": 375,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/contact",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/",
+    "width": 1280,
+    "layout": {
+      "width": 1280,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/",
+      "og": "http://127.0.0.1:3005/opengraph-image?646e4130a0eee440",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/gallery",
+    "width": 1280,
+    "layout": {
+      "width": 1280,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/gallery",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/quote",
+    "width": 1280,
+    "layout": {
+      "width": 1280,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/quote",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  },
+  {
+    "path": "/contact",
+    "width": 1280,
+    "layout": {
+      "width": 1280,
+      "overflow": false,
+      "h1": 1,
+      "canonical": "http://127.0.0.1:3005/contact",
+      "og": "http://127.0.0.1:3005/opengraph-image",
+      "missingAlt": 0
+    },
+    "errors": [],
+    "axe": []
+  }
+]
